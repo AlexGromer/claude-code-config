@@ -1,0 +1,226 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SECURITY CHECKS
+  # ═══════════════════════════════════════════════════════════════════════════
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks (secrets detection)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for sensitive patterns
+        run: |
+          echo "Checking for sensitive patterns..."
+
+          # Patterns that should NEVER appear in committed files
+          PATTERNS=(
+            "ANTHROPIC_API_KEY"
+            "OPENAI_API_KEY"
+            "sk-ant-"
+            "sk-proj-"
+            "ghp_"
+            "gho_"
+            "password\s*="
+            "secret\s*="
+            "api_key\s*="
+            "BEGIN RSA PRIVATE KEY"
+            "BEGIN OPENSSH PRIVATE KEY"
+            "BEGIN EC PRIVATE KEY"
+          )
+
+          FOUND=0
+          for pattern in "${PATTERNS[@]}"; do
+            if grep -rE "$pattern" --include="*.md" --include="*.yml" --include="*.yaml" --include="*.json" --include="*.py" --include="*.sh" . 2>/dev/null | grep -v ".git" | grep -v "ci.yml"; then
+              echo "⚠️ Found potential secret pattern: $pattern"
+              FOUND=1
+            fi
+          done
+
+          if [ $FOUND -eq 1 ]; then
+            echo "❌ Security check failed: potential secrets detected"
+            exit 1
+          else
+            echo "✅ No secrets detected"
+          fi
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # MARKDOWN VALIDATION
+  # ═══════════════════════════════════════════════════════════════════════════
+  markdown:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdownlint
+        run: |
+          # Create config to allow long lines (documentation has diagrams)
+          cat > .markdownlint.json << 'EOF'
+          {
+            "MD013": false,
+            "MD033": false,
+            "MD041": false,
+            "MD024": false,
+            "MD036": false
+          }
+          EOF
+
+          markdownlint '*.md' --ignore node_modules || true
+          echo "✅ Markdown lint completed"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STRUCTURE VALIDATION
+  # ═══════════════════════════════════════════════════════════════════════════
+  structure:
+    name: Structure Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate required files exist
+        run: |
+          echo "Checking required files..."
+
+          REQUIRED_FILES=(
+            "README.md"
+            ".gitignore"
+            "AGENT_DEVELOPMENT_GUIDE.md"
+            "PRIORITIZED_IMPLEMENTATION_PLAN.md"
+          )
+
+          MISSING=0
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Missing required file: $file"
+              MISSING=1
+            else
+              echo "✅ Found: $file"
+            fi
+          done
+
+          if [ $MISSING -eq 1 ]; then
+            exit 1
+          fi
+
+      - name: Check for .claude directory (should NOT exist)
+        run: |
+          if [ -d ".claude" ]; then
+            echo "❌ ERROR: .claude directory should not be committed!"
+            exit 1
+          else
+            echo "✅ No .claude directory in repo (correct)"
+          fi
+
+      - name: Validate .gitignore includes critical patterns
+        run: |
+          PATTERNS=(
+            ".claude/"
+            ".env"
+            "credentials.json"
+            "*.pem"
+            "*.key"
+          )
+
+          for pattern in "${PATTERNS[@]}"; do
+            if grep -q "$pattern" .gitignore; then
+              echo "✅ .gitignore includes: $pattern"
+            else
+              echo "⚠️ WARNING: .gitignore missing pattern: $pattern"
+            fi
+          done
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # DOCUMENTATION METRICS
+  # ═══════════════════════════════════════════════════════════════════════════
+  metrics:
+    name: Documentation Metrics
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Calculate documentation metrics
+        run: |
+          echo "📊 Documentation Metrics"
+          echo "========================"
+          echo ""
+
+          # Count markdown files
+          MD_COUNT=$(find . -name "*.md" -type f | wc -l)
+          echo "Markdown files: $MD_COUNT"
+
+          # Total lines
+          TOTAL_LINES=$(find . -name "*.md" -type f -exec wc -l {} + | tail -1 | awk '{print $1}')
+          echo "Total lines: $TOTAL_LINES"
+
+          # Count code blocks
+          CODE_BLOCKS=$(grep -r '```' --include="*.md" . | wc -l)
+          CODE_BLOCKS=$((CODE_BLOCKS / 2))
+          echo "Code blocks: $CODE_BLOCKS"
+
+          # Count tables
+          TABLES=$(grep -r '^|' --include="*.md" . | head -1000 | wc -l)
+          echo "Table rows: $TABLES"
+
+          # Count GAP references
+          GAPS=$(grep -roh 'GAP-[A-Z]*-[0-9]*' --include="*.md" . | sort -u | wc -l)
+          echo "Unique GAP IDs: $GAPS"
+
+          echo ""
+          echo "✅ Metrics calculated successfully"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LINK VALIDATION
+  # ═══════════════════════════════════════════════════════════════════════════
+  links:
+    name: Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check internal links
+        run: |
+          echo "Checking internal file references..."
+
+          # Extract file references from markdown
+          ERRORS=0
+          for file in *.md; do
+            # Check for broken internal links like [text](file.md)
+            while IFS= read -r link; do
+              if [ ! -f "$link" ] && [ ! -d "$link" ]; then
+                # Ignore external URLs and anchors
+                if [[ ! "$link" =~ ^http ]] && [[ ! "$link" =~ ^# ]] && [[ ! "$link" =~ ^mailto ]]; then
+                  echo "⚠️ Potential broken link in $file: $link"
+                fi
+              fi
+            done < <(grep -oE '\]\([^)]+\)' "$file" 2>/dev/null | sed 's/\](//' | sed 's/)//' | grep -v '^http' | grep -v '^#')
+          done
+
+          echo "✅ Link check completed"

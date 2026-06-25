@@ -1,0 +1,5 @@
+config-version: 9.1.0
+initialized: 2026-02-26
+upgraded: 2026-03-25
+stack: claude-code-config
+domains: security, devops, ai-agents

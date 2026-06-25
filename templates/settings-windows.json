@@ -1,0 +1,604 @@
+{
+  "_comment": "Windows-specific Claude Code settings. Merge with ~/.claude/settings.json on Windows. Generated 2026-03-17 from settings.json audit. See docs/WINDOWS_PORTING.md for full porting guide.",
+  "env": {
+    "ANTHROPIC_MODEL": "claude-opus-4-6[1m]",
+    "API_TIMEOUT_MS": "600000",
+    "BASH_DEFAULT_TIMEOUT_MS": "300000",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64000",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "SLASH_COMMAND_TOOL_CHAR_BUDGET": "8000"
+  },
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Grep(*)",
+      "Glob(*)",
+      "WebSearch",
+
+      "Edit(%USERPROFILE%\\.claude\\**)",
+      "Write(%USERPROFILE%\\.claude\\**)",
+
+      "Edit(%USERPROFILE%\\claude-workspaces\\osint\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\osint\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\devops\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\devops\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\reverse\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\reverse\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\dfir\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\dfir\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\ml\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\ml\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\compliance\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\compliance\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\business\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\business\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\go\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\go\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\templates\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\templates\\**)",
+      "Edit(%USERPROFILE%\\claude-workspaces\\agent_work_directory\\**)",
+      "Write(%USERPROFILE%\\claude-workspaces\\agent_work_directory\\**)",
+
+      "mcp__github__add_issue_comment",
+      "mcp__github__create_branch",
+      "mcp__github__create_issue",
+      "mcp__github__create_or_update_file",
+      "mcp__github__create_pull_request",
+      "mcp__github__create_pull_request_review",
+      "mcp__github__create_repository",
+      "mcp__github__fork_repository",
+      "mcp__github__get_file_contents",
+      "mcp__github__get_issue",
+      "mcp__github__get_pull_request",
+      "mcp__github__get_pull_request_comments",
+      "mcp__github__get_pull_request_files",
+      "mcp__github__get_pull_request_reviews",
+      "mcp__github__get_pull_request_status",
+      "mcp__github__list_commits",
+      "mcp__github__list_issues",
+      "mcp__github__list_pull_requests",
+      "mcp__github__merge_pull_request",
+      "mcp__github__push_files",
+      "mcp__github__search_code",
+      "mcp__github__search_issues",
+      "mcp__github__search_repositories",
+      "mcp__github__search_users",
+      "mcp__github__update_issue",
+      "mcp__github__update_pull_request_branch",
+      "mcp__fetch__fetch",
+      "mcp__filesystem__create_directory",
+      "mcp__filesystem__directory_tree",
+      "mcp__filesystem__edit_file",
+      "mcp__filesystem__get_file_info",
+      "mcp__filesystem__list_allowed_directories",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__list_directory_with_sizes",
+      "mcp__filesystem__move_file",
+      "mcp__filesystem__read_file",
+      "mcp__filesystem__read_media_file",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__search_files",
+      "mcp__filesystem__write_file",
+      "mcp__memory__add_observations",
+      "mcp__memory__create_entities",
+      "mcp__memory__create_relations",
+      "mcp__memory__delete_entities",
+      "mcp__memory__delete_observations",
+      "mcp__memory__delete_relations",
+      "mcp__memory__open_nodes",
+      "mcp__memory__read_graph",
+      "mcp__memory__search_nodes",
+      "mcp__git__git_add",
+      "mcp__git__git_branch",
+      "mcp__git__git_checkout",
+      "mcp__git__git_commit",
+      "mcp__git__git_create_branch",
+      "mcp__git__git_diff",
+      "mcp__git__git_diff_staged",
+      "mcp__git__git_diff_unstaged",
+      "mcp__git__git_log",
+      "mcp__git__git_show",
+      "mcp__git__git_status",
+      "mcp__sequential-thinking__sequentialthinking",
+      "mcp__sqlite__append_insight",
+      "mcp__sqlite__create_table",
+      "mcp__sqlite__describe_table",
+      "mcp__sqlite__list_tables",
+      "mcp__sqlite__read_query",
+      "mcp__sqlite__write_query",
+      "mcp__backlog-mcp__backlog_add",
+      "mcp__backlog-mcp__backlog_complete",
+      "mcp__backlog-mcp__backlog_delete",
+      "mcp__backlog-mcp__backlog_list",
+      "mcp__backlog-mcp__backlog_rotate",
+      "mcp__backlog-mcp__backlog_stale",
+      "mcp__backlog-mcp__backlog_stats",
+      "mcp__backlog-mcp__backlog_update",
+      "mcp__terraform__get_latest_module_version",
+      "mcp__terraform__get_latest_provider_version",
+      "mcp__terraform__get_module_details",
+      "mcp__terraform__get_policy_details",
+      "mcp__terraform__get_provider_capabilities",
+      "mcp__terraform__get_provider_details",
+      "mcp__terraform__search_modules",
+      "mcp__terraform__search_policies",
+      "mcp__terraform__search_providers",
+      "mcp__profile-mcp__profile_ensure_essential",
+      "mcp__profile-mcp__profile_list",
+      "mcp__profile-mcp__profile_load",
+      "mcp__profile-mcp__profile_load_all",
+      "mcp__profile-mcp__profile_reset",
+      "mcp__profile-mcp__profile_show",
+      "mcp__profile-mcp__profile_status",
+      "mcp__profile-mcp__profile_unload",
+      "mcp__doctor-mcp__doctor_check",
+      "mcp__doctor-mcp__doctor_full",
+      "mcp__doctor-mcp__doctor_json",
+      "mcp__gc-mcp__gc_dry_run",
+      "mcp__gc-mcp__gc_run",
+      "mcp__gc-mcp__gc_status",
+      "mcp__score-mcp__score_batch",
+      "mcp__score-mcp__score_dimensions",
+      "mcp__score-mcp__score_discovery",
+      "mcp__tools-mcp__criteria_freeze",
+      "mcp__tools-mcp__criteria_unfreeze",
+      "mcp__tools-mcp__criteria_check",
+      "mcp__tools-mcp__criteria_list",
+      "mcp__tools-mcp__session_start",
+      "mcp__tools-mcp__session_end",
+      "mcp__tools-mcp__session_status",
+      "mcp__tools-mcp__session_list",
+      "mcp__tools-mcp__session_cleanup",
+      "mcp__tools-mcp__usage_record",
+      "mcp__tools-mcp__usage_report",
+      "mcp__tools-mcp__usage_top_tools",
+      "mcp__tools-mcp__usage_trends",
+      "mcp__tools-mcp__scope_track",
+      "mcp__tools-mcp__scope_status",
+
+      "Bash(git:status*)",
+      "Bash(git:log*)",
+      "Bash(git:diff*)",
+      "Bash(git:branch*)",
+      "Bash(git:show*)",
+      "Bash(git:stash*)",
+      "Bash(git:fetch*)",
+      "Bash(git:remote*)",
+      "Bash(git:add*)",
+      "Bash(git:commit*)",
+      "Bash(git:tag*)",
+      "Bash(git:rev-parse*)",
+      "Bash(git:ls-files*)",
+      "Bash(git:blame*)",
+      "Bash(git:shortlog*)",
+      "Bash(git:describe*)",
+      "Bash(git:config --get*)",
+      "Bash(git:worktree*)",
+
+      "Bash(gitleaks detect:*)",
+
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(py:*)",
+      "Bash(pip:list*)",
+      "Bash(pip:show*)",
+      "Bash(pip:freeze*)",
+      "Bash(pip:check*)",
+      "Bash(pip:download*)",
+      "Bash(pip:search*)",
+      "Bash(pip3:list*)",
+      "Bash(pip3:show*)",
+      "Bash(pip3:freeze*)",
+      "Bash(pip3:check*)",
+      "Bash(pip3:download*)",
+      "Bash(pip3:search*)",
+      "Bash(pytest:*)",
+
+      "Bash(go:*)",
+      "Bash(gofmt:*)",
+      "Bash(golangci-lint run:*)",
+      "Bash(make:*)",
+      "Bash(cmake:*)",
+
+      "Bash(powershell:*)",
+      "Bash(pwsh:*)",
+
+      "Bash(jq:*)",
+      "Bash(yq:*)",
+
+      "Bash(dir:*)",
+      "Bash(type:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(where:*)",
+
+      "Bash(ping:*)",
+      "Bash(nslookup:*)",
+      "Bash(tracert:*)",
+      "Bash(curl:-s*)",
+      "Bash(curl:--silent*)",
+      "Bash(whois:*)",
+
+      "Bash(docker:ps*)",
+      "Bash(docker:images*)",
+      "Bash(docker:logs*)",
+      "Bash(docker:inspect*)",
+      "Bash(docker-compose:ps*)",
+      "Bash(docker-compose:logs*)",
+      "Bash(kubectl:get*)",
+      "Bash(kubectl:describe*)",
+      "Bash(kubectl:logs*)",
+      "Bash(helm:list*)",
+      "Bash(helm:status*)",
+      "Bash(helm:get*)",
+      "Bash(helm:show*)",
+      "Bash(helm:search*)",
+      "Bash(helm:repo list*)",
+      "Bash(helm:template*)",
+      "Bash(helm:lint*)",
+      "Bash(helm:verify*)",
+      "Bash(helm:version*)",
+      "Bash(helm:history*)",
+      "Bash(helm:diff*)",
+      "Bash(helm:dependency list*)",
+      "Bash(helm:env*)",
+      "Bash(helmfile:diff*)",
+      "Bash(helmfile:list*)",
+      "Bash(helmfile:status*)",
+      "Bash(helmfile:template*)",
+      "Bash(helmfile:lint*)",
+      "Bash(helmfile:fetch*)",
+      "Bash(helmfile:repos*)",
+      "Bash(helmfile:version*)",
+      "Bash(terraform:plan*)",
+      "Bash(terraform:show*)",
+      "Bash(terraform:state*)",
+      "Bash(terraform:output*)",
+      "Bash(terraform:validate*)",
+      "Bash(terraform:fmt*)",
+
+      "Bash(k6:*)",
+      "Bash(artillery:*)",
+      "Bash(hey:*)",
+      "Bash(wrk:*)",
+
+      "Bash(echo:*)",
+      "Bash(env:*)",
+      "Bash(set:*)",
+      "Bash(time:*)",
+
+      "Bash(claude doctor:*)",
+      "Bash(claude /doctor:*)",
+      "Bash(claude mcp:*)",
+
+      "WebFetch(domain:alignment.anthropic.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:assets.anthropic.com)",
+      "WebFetch(domain:atlas.mitre.org)",
+      "WebFetch(domain:cheatsheetseries.owasp.org)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:claudelog.com)",
+      "WebFetch(domain:dave.engineer)",
+      "WebFetch(domain:example.com)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:docs.censys.com)",
+      "WebFetch(domain:genai.owasp.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:habr.com)",
+      "WebFetch(domain:learnprompting.org)",
+      "WebFetch(domain:mcp-awesome.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:platform.censys.io)",
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:registry.modelcontextprotocol.io)",
+      "WebFetch(domain:sanderschulhoff.com)",
+      "WebFetch(domain:thezvi.substack.com)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:www.npmjs.com)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets.*)",
+      "Read(**/*token*)",
+      "Read(**/*apikey*)",
+      "Read(**/*password*)",
+      "Read(**/*secret*)",
+
+      "Bash(git:push --force*)",
+      "Bash(git:push -f *)",
+
+      "Bash(del:/s /q C:\\*)",
+      "Bash(rmdir:/s /q C:\\*)",
+      "Bash(format:*)",
+      "Bash(shutdown:*)",
+      "Bash(shutdown:/s*)",
+      "Bash(shutdown:/r*)",
+
+      "Bash(wget * | bash)",
+      "Bash(curl * | bash)",
+      "Bash(iex:*)",
+      "Bash(Invoke-Expression:*)"
+    ],
+    "ask": [
+      "mcp__git__git_reset",
+      "Bash(git:push*)",
+      "Bash(git:pull*)",
+      "Bash(git:merge*)",
+      "Bash(git:rebase*)",
+      "Bash(git:checkout*)",
+      "Bash(git:switch*)",
+      "Bash(git:cherry-pick*)",
+      "Bash(git:reset*)",
+      "Bash(git:restore*)",
+      "Bash(git:clean*)",
+
+      "Bash(pip:install*)",
+      "Bash(pip3:install*)",
+
+      "Bash(docker:run*)",
+      "Bash(docker:build*)",
+      "Bash(docker:exec*)",
+      "Bash(docker:stop*)",
+      "Bash(docker:rm*)",
+      "Bash(docker:rmi*)",
+      "Bash(docker-compose:up*)",
+      "Bash(docker-compose:down*)",
+      "Bash(docker-compose:build*)",
+
+      "Bash(kubectl:apply*)",
+      "Bash(kubectl:delete*)",
+      "Bash(kubectl:exec*)",
+      "Bash(kubectl:edit*)",
+      "Bash(kubectl:scale*)",
+      "Bash(kubectl:rollout*)",
+
+      "Bash(helm:install*)",
+      "Bash(helm:upgrade*)",
+      "Bash(helm:rollback*)",
+      "Bash(helm:uninstall*)",
+      "Bash(helm:delete*)",
+      "Bash(helm:repo add*)",
+      "Bash(helm:repo update*)",
+      "Bash(helm:repo remove*)",
+      "Bash(helm:push*)",
+      "Bash(helm:pull*)",
+      "Bash(helm:package*)",
+      "Bash(helm:dependency update*)",
+      "Bash(helm:dependency build*)",
+      "Bash(helm:create*)",
+      "Bash(helm:registry*)",
+      "Bash(helm:plugin*)",
+
+      "Bash(helmfile:sync*)",
+      "Bash(helmfile:apply*)",
+      "Bash(helmfile:destroy*)",
+      "Bash(helmfile:delete*)",
+
+      "Bash(terraform:apply*)",
+      "Bash(terraform:destroy*)",
+      "Bash(terraform:init*)",
+
+      "Bash(curl:-X*)",
+      "Bash(curl:-d*)",
+      "Bash(curl:--data*)",
+
+      "Bash(del:*)",
+      "Bash(rmdir:*)",
+      "Bash(move:*)",
+      "Bash(copy:*)",
+      "Bash(icacls:*)",
+
+      "Bash(runas:*)",
+      "Bash(net user:*)",
+      "Bash(net localgroup:*)",
+      "Bash(sc:*)",
+      "Bash(schtasks:*)",
+
+      "Bash(nmap:*)",
+      "Bash(masscan:*)"
+    ],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "_note": "On Windows: hooks are invoked as 'command' strings. Python must be in PATH. 2>NUL replaces 2>/dev/null.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/session_start_reinforcement.py 2>NUL & exit /b 0",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/session_startup_hook.py 2>NUL & exit /b 0",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/session_startup_dashboard.py 2>NUL & exit /b 0",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/session_health_check.py 2>NUL & exit /b 0",
+            "timeout": 5
+          },
+          {
+            "_note": "gc-mcp.exe must be compiled for windows/amd64. See docs/WINDOWS_PORTING.md Section 4.",
+            "type": "command",
+            "command": "%USERPROFILE%\\.claude\\mcp-servers\\gc-mcp\\gc-mcp.exe --quick 2>NUL & exit /b 0",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "_note": "session_end_hook.py has fcntl — must be ported before enabling. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/session_end_hook.py 2>NUL & exit /b 0",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/settings_backup_hook.py 2>NUL & exit /b 0",
+            "timeout": 2
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/input_validation_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "_note": "hitl_approval_hook.py has fcntl — must be ported. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/hitl_approval_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "_note": "Requires gitleaks.exe in PATH. Download from github.com/gitleaks/gitleaks/releases",
+            "type": "command",
+            "command": "python ~/.claude/hooks/gitleaks_precommit_hook.py 2>NUL & exit /b 0",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "_note": "unified_budget_hook.py has fcntl — must be ported. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/evaluation/hooks/unified_budget_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "_note": "unified_tool_metrics_hook.py has fcntl — must be ported. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/evaluation/hooks/unified_tool_metrics_hook.py 2>NUL & exit /b 0",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ~/.claude/evaluation/hooks/unified_cost_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/code_review_hook.py 2>NUL & exit /b 0",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ~/.claude/hooks/filemap_update_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "_note": "scope_tracking_hook.py has hardcoded /home/user path — fix before enabling.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/scope_tracking_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "_note": "tool_failure_hook.py has fcntl — must be ported. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/evaluation/hooks/tool_failure_hook.py 2>NUL & exit /b 0",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "_note": "user_prompt_submit_hook.py has hardcoded /opt/ path — fix before enabling.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/user_prompt_submit_hook.py 2>NUL & exit /b 0",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "_note": "pre_compact_hook.py has fcntl — must be ported. See WINDOWS_PORTING.md Section 3.",
+            "type": "command",
+            "command": "python ~/.claude/hooks/pre_compact_hook.py 2>NUL & exit /b 0",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "_statusLine_note": "statusline.sh is a bash script with inline fcntl usage. It cannot run on Windows as-is. Remove or replace with a Python equivalent. See WINDOWS_PORTING.md Section 3.4.",
+  "effortLevel": "high"
+}

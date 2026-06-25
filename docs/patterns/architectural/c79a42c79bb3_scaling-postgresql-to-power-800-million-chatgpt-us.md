@@ -1,0 +1,36 @@
+# Scaling PostgreSQL to power 800 million ChatGPT users - Architectural Pattern
+
+**ID:** c79a42c79bb3
+**Category:** PatternCategory.ARCHITECTURAL
+**Date Extracted:** 2026-01-28T15:25:12.642734+00:00
+**Confidence:** 0.45
+
+## Source
+
+- **Title:** Scaling PostgreSQL to power 800 million ChatGPT users
+- **URL:** https://openai.com/index/scaling-postgresql
+- **Original Score:** 20.0
+
+## Description
+
+Pattern extracted from: Scaling PostgreSQL to power 800 million ChatGPT users
+
+## Use Cases
+
+- (none specified)
+
+## Implementation Notes
+
+(none)
+
+## CLI Relevance
+
+(not specified)
+
+## Tags
+
+scaling
+
+## Related Gaps
+
+(none)
